@@ -2,14 +2,33 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Plus, Minus, Trash2, ShieldCheck } from 'lucide-react'
 import { useCart } from '../context/CartContext.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
+import { useToast } from '../context/ToastContext.jsx'
 import { inr } from './Price.jsx'
 import { useState } from 'react'
 import './cart-drawer.css'
 
 export default function CartDrawer() {
   const { open, setOpen, items, removeItem, setQty, subtotal, discount, tax, shipping, total, applyCoupon, coupon } = useCart()
+  const { isLoggedIn } = useAuth()
+  const { addToast } = useToast()
   const [code, setCode] = useState('')
   const [msg, setMsg] = useState('')
+
+  const handleCheckout = (e) => {
+    if (!isLoggedIn) {
+      e.preventDefault()
+      addToast('Please log in to continue', {
+        action: {
+          label: 'Sign In',
+          onClick: () => window.location.href = '/account'
+        },
+        duration: 0
+      })
+    } else {
+      setOpen(false)
+    }
+  }
   return (
     <AnimatePresence>
       {open && (
@@ -52,7 +71,7 @@ export default function CartDrawer() {
                 <Row label="Tax (8%)" val={inr(tax)} />
                 <Row label="Shipping" val={shipping===0?'Free':inr(shipping)} />
                 <Row label="Total" val={inr(total)} strong />
-                <Link to="/checkout" className="btn btn--block" onClick={()=>setOpen(false)}>Secure Checkout</Link>
+                <Link to={isLoggedIn ? "/checkout" : "#"} className="btn btn--block" onClick={handleCheckout}>Secure Checkout</Link>
                 <button className="btn btn--ghost btn--block" onClick={()=>setOpen(false)}>Continue Shopping</button>
                 <p className="drawer__secure"><ShieldCheck size={14}/> Encrypted & secure payments</p>
               </footer>
