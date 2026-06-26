@@ -2,7 +2,10 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Truck, RefreshCw, ShieldCheck, Zap } from 'lucide-react'
 import Reveal from '../components/Reveal.jsx'
-import { CATEGORIES } from '../data/products.js'
+import ProductCard from '../components/ProductCard.jsx'
+import QuickView from '../components/QuickView.jsx'
+import { CATEGORIES, PRODUCTS } from '../data/products.js'
+import { useState } from 'react'
 
 const PageMotion = { initial:{opacity:0}, animate:{opacity:1}, exit:{opacity:0}, transition:{duration:.4} }
 const stagger = { hidden:{}, show:{ transition:{ staggerChildren:.06 } } }
@@ -11,6 +14,8 @@ const word = { hidden:{opacity:0,y:24}, show:{opacity:1,y:0,transition:{duration
 export default function Home() {
   const headline = ['Style','Beyond','Trends']
   const displayCategories = CATEGORIES.filter(c => c.slug !== 'pants')
+  const [quickView, setQuickView] = useState(null)
+  const newArrivals = PRODUCTS.slice(0, 4)
   return (
     <motion.div {...PageMotion}>
       {/* HERO */}
@@ -47,12 +52,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* WHAT'S NEW */}
+      <section className="section container">
+        <Reveal><div className="section__head"><span className="eyebrow">Latest</span><h2>What's New</h2></div></Reveal>
+        <div className="whats-new">
+          <div className="whats-new__featured">
+            <Reveal>
+              <div className="new-featured">
+                <Link to={`/product/${newArrivals[0].id}`}>
+                  <motion.img src={newArrivals[0].image} alt={newArrivals[0].name}
+                    whileHover={{scale:1.08}} transition={{duration:.6,ease:[0.22,0.61,0.36,1]}} />
+                </Link>
+                <div className="new-featured__label">
+                  <span className="new-featured__tag">Just In</span>
+                  <h3>{newArrivals[0].name}</h3>
+                  <p>{newArrivals[0].description}</p>
+                  <Link to={`/product/${newArrivals[0].id}`} className="btn">Explore</Link>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+          <div className="whats-new__grid">
+            {newArrivals.slice(1).map((product,i)=>(
+              <Reveal key={product.id} delay={i*.05}>
+                <ProductCard product={product} onQuickView={setQuickView} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* PROMO */}
       <section className="section"><div className="container promo">
         {[[Truck,'Free Shipping','On orders over ₹4,999'],[RefreshCw,'Easy Returns','30-day hassle-free'],[ShieldCheck,'Secure Payments','256-bit encryption'],[Zap,'Fast Delivery','2–4 business days']].map(([Icon,t,s],i)=>(
           <Reveal key={i} delay={i*.05}><div className="promo__item"><Icon size={26}/><div><strong>{t}</strong><span>{s}</span></div></div></Reveal>
         ))}
       </div></section>
+
+      {quickView && <QuickView product={quickView} onClose={()=>setQuickView(null)} />}
     </motion.div>
   )
 }
