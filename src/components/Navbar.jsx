@@ -4,12 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Search, Heart, User, ShoppingBag, Menu, X } from 'lucide-react'
 import { useCart } from '../context/CartContext.jsx'
 import { useWishlist } from '../context/WishlistContext.jsx'
+import NavDropdown from './NavDropdown.jsx'
 import './navbar.css'
 
 const LINKS = [
   { to:'/', label:'Home' },
-  { to:'/category/shirts', label:'Men' },
-  { to:'/category/dresses', label:'Women' },
   { to:'/category/shoes', label:'Shoes' },
   { to:'/category/watches', label:'Watches' },
   { to:'/category/shirts', label:'New Arrivals' },
@@ -36,7 +35,9 @@ export default function Navbar() {
         <Link to="/" className="nav__logo">OUTFIT</Link>
 
         <nav className="nav__links" aria-label="Primary">
-          {LINKS.map((l,i)=>(
+          <NavLink to="/" className={({isActive})=>'nav__link'+(isActive?' is-active':'')}>Home</NavLink>
+          <NavDropdown />
+          {LINKS.slice(1).map((l,i)=>(
             <NavLink key={i} to={l.to} className={({isActive})=>'nav__link'+(isActive?' is-active':'')}>{l.label}</NavLink>
           ))}
         </nav>

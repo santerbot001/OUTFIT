@@ -2,7 +2,7 @@
 .nav--scrolled{border-color:var(--line);box-shadow:0 6px 20px rgba(10,10,10,.05)}
 .nav__inner{height:var(--nav-h);display:flex;align-items:center;gap:24px}
 .nav__logo{font-family:var(--font-head);font-weight:700;font-size:22px;letter-spacing:.14em}
-.nav__links{display:flex;gap:22px;margin-left:8px;flex:1}
+.nav__links{display:flex;gap:22px;margin-left:8px;flex:1;align-items:center}
 .nav__link{position:relative;font-size:13.5px;font-weight:500;color:var(--ink-soft);padding:4px 0;transition:color .25s}
 .nav__link::after{content:'';position:absolute;left:0;bottom:-2px;height:1.5px;width:0;background:var(--ink);transition:width .3s var(--ease)}
 .nav__link:hover,.nav__link.is-active{color:var(--ink)}
