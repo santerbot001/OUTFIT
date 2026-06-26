@@ -4,7 +4,7 @@ import { Check } from 'lucide-react'
 import { useCart } from '../context/CartContext.jsx'
 import { inr } from '../components/Price.jsx'
 
-const STEPS = ['Address','Delivery','Payment','Review']
+const STEPS = ['Address','Payment','Review']
 export default function Checkout() {
   const { items, subtotal, discount, tax, shipping, total, clear } = useCart()
   const [step,setStep] = useState(0)
@@ -22,9 +22,8 @@ export default function Checkout() {
         <div className="steps">{STEPS.map((s,i)=>(<div key={s} className={'steps__item'+(i<=step?' is-on':'')}><span className="steps__dot">{i<step?<Check size={14}/>:i+1}</span><span>{s}</span></div>))}</div>
         <motion.div key={step} initial={{opacity:0,x:16}} animate={{opacity:1,x:0}} transition={{duration:.35}} className="checkout__panel">
           {step===0 && <Form fields={[['Full name','text'],['Phone','tel'],['Address line','text'],['City','text'],['State','text'],['PIN code','text']]} title="Shipping address" />}
-          {step===1 && <div className="opts">{[['Standard','2–4 days · Free'],['Express','1–2 days · ₹199'],['Same Day','Today · ₹399']].map(([t,s],i)=>(<label key={t} className="opt"><input type="radio" name="del" defaultChecked={i===0}/><div><strong>{t}</strong><span>{s}</span></div></label>))}</div>}
-          {step===2 && <div className="opts">{[['Card','Visa, Mastercard, Amex'],['UPI','GPay, PhonePe, Paytm'],['Cash on Delivery','Pay when it arrives']].map(([t,s],i)=>(<label key={t} className="opt"><input type="radio" name="pay" defaultChecked={i===0}/><div><strong>{t}</strong><span>{s}</span></div></label>))}</div>}
-          {step===3 && <div><h3 style={{marginBottom:12}}>Review your order</h3>{items.map(it=>(<div key={it.key} className="checkout__line"><span>{it.name} × {it.qty}</span><strong>{inr(it.price*it.qty)}</strong></div>))}{items.length===0 && <p style={{color:'var(--muted)'}}>Your cart is empty.</p>}</div>}
+          {step===1 && <div className="opts">{[['Card','Visa, Mastercard, Amex'],['UPI','GPay, PhonePe, Paytm'],['Cash on Delivery','Pay when it arrives']].map(([t,s],i)=>(<label key={t} className="opt"><input type="radio" name="pay" defaultChecked={i===0}/><div><strong>{t}</strong><span>{s}</span></div></label>))}</div>}
+          {step===2 && <div><h3 style={{marginBottom:12}}>Review your order</h3>{items.map(it=>(<div key={it.key} className="checkout__line"><span>{it.name} × {it.qty}</span><strong>{inr(it.price*it.qty)}</strong></div>))}{items.length===0 && <p style={{color:'var(--muted)'}}>Your cart is empty.</p>}</div>}
         </motion.div>
         <div className="checkout__nav">{step>0 && <button className="btn btn--ghost" onClick={()=>setStep(s=>s-1)}>Back</button>}<button className="btn" onClick={next}>{step===STEPS.length-1?'Place Order':'Continue'}</button></div>
       </div>
