@@ -31,7 +31,7 @@ export default function Product() {
       addToast('Please log in to continue', {
         action: {
           label: 'Sign In',
-          onClick: () => navigate('/account')
+          onClick: () => window.location.href = '/account'
         },
         duration: 0
       })
