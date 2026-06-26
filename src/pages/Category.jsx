@@ -6,11 +6,11 @@ import ProductCard from '../components/ProductCard.jsx'
 import './category.css'
 
 const MEN_SUBCATEGORIES = [
-  { label: 'Casual wears', slug: 'mens-casual', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=800&fit=crop' },
-  { label: 'Formals wears', slug: 'mens-formals', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop' },
-  { label: 'Party wears', slug: 'mens-party', image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&h=800&fit=crop' },
-  { label: 'Street wears', slug: 'mens-street', image: 'https://images.unsplash.com/photo-1552062407-c551eeda4bbb?w=600&h=800&fit=crop' },
-  { label: 'Traditional wears', slug: 'mens-traditional', image: 'https://images.unsplash.com/photo-1517260103827-4da541708057?w=600&h=800&fit=crop' },
+  { label: 'Casual wears', slug: 'mens-casual', image: 'https://images.unsplash.com/photo-1490185160400-75e656de9742?w=600&h=800&fit=crop' },
+  { label: 'Formals wears', slug: 'mens-formals', image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&h=800&fit=crop' },
+  { label: 'Party wears', slug: 'mens-party', image: 'https://images.unsplash.com/photo-1539533057440-7814a9755706?w=600&h=800&fit=crop' },
+  { label: 'Street wears', slug: 'mens-street', image: 'https://images.unsplash.com/photo-1529886407128-c65c84de1fb4?w=600&h=800&fit=crop' },
+  { label: 'Traditional wears', slug: 'mens-traditional', image: 'https://images.unsplash.com/photo-1591209240644-b57fa99d6daa?w=600&h=800&fit=crop' },
 ]
 
 export default function Category() {
