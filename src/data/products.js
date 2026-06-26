@@ -2,12 +2,12 @@
 const img = (seed) => `https://picsum.photos/seed/${seed}/800/1000`
 
 export const CATEGORIES = [
-  { slug: 'shirts', label: "Men's Shirts", cover: img('outfit-shirts-hero') },
+  { slug: 'shirts', label: "Men's Shirts", cover: 'https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F7967847b2acf4d5a9769d31187fb2e6e?format=webp&width=800&height=1200' },
   { slug: 'pants', label: "Men's Pants", cover: img('outfit-pants-hero') },
   { slug: 'dresses', label: "Sale", cover: img('outfit-dresses-hero') },
-  { slug: 'women-dresses', label: "Women's Dresses", cover: img('outfit-dresses-hero') },
-  { slug: 'shoes', label: 'Shoes', cover: img('outfit-shoes-hero') },
-  { slug: 'watches', label: 'Watches', cover: img('outfit-watches-hero') },
+  { slug: 'women-dresses', label: "Women's Dresses", cover: 'https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F429f00ab51014a38b58506a362beb64f?format=webp&width=800&height=1200' },
+  { slug: 'shoes', label: 'Shoes', cover: 'https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F8a9c2dc5ae2e41fc9b616c24152d0686?format=webp&width=800&height=1200' },
+  { slug: 'watches', label: 'Watches', cover: 'https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F0c7f2b6240f54d449d7a6367fcf77477?format=webp&width=800&height=1200' },
 ]
 
 const mk = (id, name, brand, category, price, original, rating, colors, sizes, collection) => ({
