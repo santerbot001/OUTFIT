@@ -8,25 +8,17 @@ import './navbar.css'
 
 const LINKS = [
   { to:'/', label:'Home' },
+  { to:'/category/shirts', label:'Men' },
   { to:'/category/women-dresses', label:'Women' },
   { to:'/category/accessories', label:'Accessories' },
   { to:'/category/dresses', label:'Sale' },
   { to:'/about', label:'About' },
 ]
 
-const MEN_SUBCATEGORIES = [
-  { label: 'Casual wears', to: '/category/mens-casual' },
-  { label: 'Formals wears', to: '/category/mens-formals' },
-  { label: 'Party wears', to: '/category/mens-party' },
-  { label: 'Street wears', to: '/category/mens-street' },
-  { label: 'Traditional wears', to: '/category/mens-traditional' },
-]
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [menDropdown, setMenDropdown] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const { setOpen, count } = useCart()
   const { count: wCount } = useWishlist()
@@ -57,29 +49,7 @@ export default function Navbar() {
 
         <nav className="nav__links" aria-label="Primary">
           <NavLink to="/" className={({isActive})=>'nav__link'+(isActive?' is-active':'')}>Home</NavLink>
-
-          <div className="nav-dropdown" onMouseEnter={()=>setMenDropdown(true)} onMouseLeave={()=>setMenDropdown(false)}>
-            <button className="nav-dropdown-trigger" onClick={()=>setMenDropdown(!menDropdown)}>
-              Men
-              <ChevronDown size={16} className={menDropdown ? 'expanded' : ''} />
-            </button>
-            {menDropdown && (
-              <div className="nav-dropdown-menu">
-                {MEN_SUBCATEGORIES.map((cat) => (
-                  <Link
-                    key={cat.to}
-                    to={cat.to}
-                    className="nav-dropdown-item"
-                    onClick={() => setMenDropdown(false)}
-                  >
-                    {cat.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {LINKS.map((l,i)=>(
+          {LINKS.slice(1).map((l,i)=>(
             <NavLink key={i} to={l.to} className={({isActive})=>'nav__link'+(isActive?' is-active':'')}>{l.label}</NavLink>
           ))}
         </nav>
