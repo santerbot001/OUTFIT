@@ -47,8 +47,6 @@ export const PRODUCTS = [
   {...mk(6, 'Classic Leather Watch', 'OUTFIT', 'watches', 3999, 6500, 4.7, ['Brown', 'Black'], ['One Size'], 'Classic', 'unisex'), image: watchImg3, gallery: [watchImg3, watchImg3, watchImg3, watchImg3]},
   {...mk(9, 'Slim Fit Chinos', 'OUTFIT', 'pants', 2299, 3500, 4.6, ['Black', 'Beige', 'Navy'], Sapp, 'Casual', 'men'), image: pantsImg1, gallery: [pantsImg1, pantsImg1, pantsImg1, pantsImg1]},
   {...mk(10, 'Classic Denim Jeans', 'OUTFIT', 'pants', 2899, 4500, 4.7, ['Black', 'Blue'], Sapp, 'Casual', 'men'), image: pantsImg2, gallery: [pantsImg2, pantsImg2, pantsImg2, pantsImg2]},
-  {...mk(11, 'Elegant Midi Dress', 'OUTFIT', 'dresses', 3899, 6000, 4.9, ['Black', 'Navy', 'Beige'], Sapp, 'Formal', 'women'), image: dressImg1, gallery: [dressImg1, dressImg1, dressImg1, dressImg1]},
-  {...mk(12, 'Casual Linen Dress', 'OUTFIT', 'dresses', 2699, 4200, 4.7, ['White', 'Beige', 'Olive'], Sapp, 'Casual', 'women'), image: dressImg2, gallery: [dressImg2, dressImg2, dressImg2, dressImg2]},
 ]
 
 export const byCategory = (slug) => {
