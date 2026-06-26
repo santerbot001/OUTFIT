@@ -30,6 +30,7 @@ export default function Home() {
           initial={{opacity:0,scale:1.06,y:-10}} animate={{opacity:1,scale:1,y:0}} transition={{duration:1.2,ease:[0.22,0.61,0.36,1]}} />
         <div className="hero__overlay" />
         <div className="container hero__content">
+          <motion.img className="hero__logo" src="https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F8ece058782244bdda9f1d6c2f07eec1c?format=webp&width=800&height=1200" alt="OUTFIT Logo" initial={{opacity:0,scale:.9}} animate={{opacity:1,scale:1}} transition={{delay:.2}} />
           <motion.span className="eyebrow" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.1}}>Premium Fashion Marketplace</motion.span>
           <motion.h1 className="hero__title" variants={stagger} initial="hidden" animate="show">
             {headline.map((w,i)=>(<motion.span key={i} variants={word} style={{display:'inline-block',marginRight:'.28em'}}>{w}</motion.span>))}

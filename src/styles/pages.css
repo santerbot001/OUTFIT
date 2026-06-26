@@ -6,6 +6,7 @@
 .hero__title{font-size:clamp(44px,7vw,86px);font-weight:700;margin:14px 0 18px;line-height:1.02}
 .hero__sub{font-size:17px;color:var(--ink-soft);max-width:460px;margin-bottom:28px}
 .hero__cta{padding:15px 34px;font-size:15px}
+.hero__logo{max-width:160px;height:auto;display:block;margin-bottom:20px}
 /* section heads */
 .section__head{margin-bottom:30px}
 .section__head h2{font-size:clamp(26px,3.4vw,38px);margin-top:6px}
