@@ -259,70 +259,54 @@
   box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
 }
 
-.swatch[data-color="black"] {
-  background-color: #000;
-}
+.swatch[data-color="black"] { background-color: #000; }
+.swatch[data-color="white"] { background-color: #fff; border-color: #ccc; }
+.swatch[data-color="gray"] { background-color: #808080; }
+.swatch[data-color="charcoal"] { background-color: #36454f; }
 
-.swatch[data-color="white"] {
-  background-color: #fff;
-  border-color: #ccc;
-}
+.swatch[data-color="red"] { background-color: #ff0000; }
+.swatch[data-color="crimson"] { background-color: #dc143c; }
+.swatch[data-color="scarlet"] { background-color: #ff2400; }
+.swatch[data-color="maroon"] { background-color: #800000; }
 
-.swatch[data-color="beige"] {
-  background-color: #f5f1e8;
-}
+.swatch[data-color="pink"] { background-color: #ffb6c1; }
+.swatch[data-color="rose"] { background-color: #ff007f; }
+.swatch[data-color="salmon"] { background-color: #fa8072; }
+.swatch[data-color="coral"] { background-color: #ff7f50; }
 
-.swatch[data-color="navy"] {
-  background-color: #001f3f;
-}
+.swatch[data-color="orange"] { background-color: #ff8c00; }
+.swatch[data-color="apricot"] { background-color: #fbaa34; }
+.swatch[data-color="peach"] { background-color: #ffcba4; }
+.swatch[data-color="tan"] { background-color: #d2b48c; }
 
-.swatch[data-color="olive"] {
-  background-color: #6b7d6b;
-}
+.swatch[data-color="yellow"] { background-color: #ffff00; }
+.swatch[data-color="gold"] { background-color: #daa520; }
+.swatch[data-color="khaki"] { background-color: #f0e68c; }
+.swatch[data-color="beige"] { background-color: #f5f1e8; }
 
-.swatch[data-color="brown"] {
-  background-color: #8b7355;
-}
+.swatch[data-color="green"] { background-color: #228b22; }
+.swatch[data-color="olive"] { background-color: #6b7d6b; }
+.swatch[data-color="sage"] { background-color: #9dc183; }
+.swatch[data-color="mint"] { background-color: #98ff98; }
 
-.swatch[data-color="silver"] {
-  background-color: #c0c0c0;
-}
+.swatch[data-color="teal"] { background-color: #008080; }
+.swatch[data-color="cyan"] { background-color: #00ffff; }
+.swatch[data-color="navy"] { background-color: #001f3f; }
+.swatch[data-color="blue"] { background-color: #1e90ff; }
 
-.swatch[data-color="gold"] {
-  background-color: #daa520;
-}
+.swatch[data-color="purple"] { background-color: #9370db; }
+.swatch[data-color="indigo"] { background-color: #4b0082; }
+.swatch[data-color="violet"] { background-color: #ee82ee; }
+.swatch[data-color="plum"] { background-color: #dda0dd; }
 
-.swatch[data-color="red"] {
-  background-color: #dc143c;
-}
+.swatch[data-color="brown"] { background-color: #8b7355; }
+.swatch[data-color="chocolate"] { background-color: #d2691e; }
+.swatch[data-color="coffee"] { background-color: #6f4e37; }
 
-.swatch[data-color="blue"] {
-  background-color: #1e90ff;
-}
-
-.swatch[data-color="green"] {
-  background-color: #228b22;
-}
-
-.swatch[data-color="gray"] {
-  background-color: #808080;
-}
-
-.swatch[data-color="pink"] {
-  background-color: #ff69b4;
-}
-
-.swatch[data-color="purple"] {
-  background-color: #9370db;
-}
-
-.swatch[data-color="orange"] {
-  background-color: #ff8c00;
-}
-
-.swatch[data-color="maroon"] {
-  background-color: #800000;
-}
+.swatch[data-color="silver"] { background-color: #c0c0c0; }
+.swatch[data-color="ivory"] { background-color: #fffff0; border-color: #ccc; }
+.swatch[data-color="cream"] { background-color: #fffdd0; }
+.swatch[data-color="nude"] { background-color: #e8bfaa; }
 
 .color-label {
   font-size: 12px;
