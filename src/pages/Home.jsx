@@ -2,7 +2,10 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Truck, RefreshCw, ShieldCheck, Zap } from 'lucide-react'
 import Reveal from '../components/Reveal.jsx'
-import { CATEGORIES } from '../data/products.js'
+import ProductCard from '../components/ProductCard.jsx'
+import QuickView from '../components/QuickView.jsx'
+import { CATEGORIES, PRODUCTS } from '../data/products.js'
+import { useState, useRef } from 'react'
 
 const PageMotion = { initial:{opacity:0}, animate:{opacity:1}, exit:{opacity:0}, transition:{duration:.4} }
 const stagger = { hidden:{}, show:{ transition:{ staggerChildren:.06 } } }
@@ -11,6 +14,14 @@ const word = { hidden:{opacity:0,y:24}, show:{opacity:1,y:0,transition:{duration
 export default function Home() {
   const headline = ['Style','Beyond','Trends']
   const displayCategories = CATEGORIES.filter(c => c.slug !== 'pants')
+  const [quickView, setQuickView] = useState(null)
+  const newArrivals = PRODUCTS.slice(0, 4)
+  const categoriesRef = useRef(null)
+
+  const handleShopClick = (e) => {
+    e.preventDefault()
+    categoriesRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
   return (
     <motion.div {...PageMotion}>
       {/* HERO */}
@@ -27,13 +38,13 @@ export default function Home() {
             Curated essentials for Men &amp; Women — timeless silhouettes, exceptional materials, effortless minimalism.
           </motion.p>
           <motion.div initial={{opacity:0,scale:.9}} animate={{opacity:1,scale:1}} transition={{delay:1,duration:.5,ease:[0.22,0.61,0.36,1]}}>
-            <Link to="/category/shirts" className="btn hero__cta">Shop Now</Link>
+            <button onClick={handleShopClick} className="btn hero__cta">Shop Now</button>
           </motion.div>
         </div>
       </section>
 
       {/* CATEGORIES */}
-      <section className="section container">
+      <section className="section container" ref={categoriesRef}>
         <Reveal><div className="section__head"><span className="eyebrow">Browse</span><h2>Shop by Category</h2></div></Reveal>
         <div className="cat-grid">
           {displayCategories.map((c,i)=>(
@@ -47,12 +58,15 @@ export default function Home() {
         </div>
       </section>
 
+
       {/* PROMO */}
       <section className="section"><div className="container promo">
         {[[Truck,'Free Shipping','On orders over ₹4,999'],[RefreshCw,'Easy Returns','30-day hassle-free'],[ShieldCheck,'Secure Payments','256-bit encryption'],[Zap,'Fast Delivery','2–4 business days']].map(([Icon,t,s],i)=>(
           <Reveal key={i} delay={i*.05}><div className="promo__item"><Icon size={26}/><div><strong>{t}</strong><span>{s}</span></div></div></Reveal>
         ))}
       </div></section>
+
+      {quickView && <QuickView product={quickView} onClose={()=>setQuickView(null)} />}
     </motion.div>
   )
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, Heart, User, ShoppingBag, Menu, X } from 'lucide-react'
 import { useCart } from '../context/CartContext.jsx'
@@ -12,20 +12,32 @@ const LINKS = [
   { to:'/category/shoes', label:'Shoes' },
   { to:'/category/watches', label:'Watches' },
   { to:'/category/dresses', label:'Sale' },
+  { to:'/about', label:'About' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
   const { setOpen, count } = useCart()
   const { count: wCount } = useWishlist()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
     onScroll(); window.addEventListener('scroll', onScroll, { passive:true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`)
+      setSearchOpen(false)
+      setSearchQuery('')
+    }
+  }
 
   return (
     <header className={'nav' + (scrolled ? ' nav--scrolled' : '')}>
@@ -56,11 +68,17 @@ export default function Navbar() {
       <AnimatePresence>
         {searchOpen && (
           <motion.div className="nav__search" initial={{opacity:0,y:-12}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-12}} transition={{duration:.3,ease:[0.22,0.61,0.36,1]}}>
-            <div className="container nav__search-inner">
+            <form className="container nav__search-inner" onSubmit={handleSearchSubmit}>
               <Search size={20}/>
-              <input autoFocus className="nav__search-input" placeholder="Search for shirts, watches, dresses…" />
-              <button className="nav__icon" aria-label="Close search" onClick={()=>setSearchOpen(false)}><X size={20}/></button>
-            </div>
+              <input
+                autoFocus
+                className="nav__search-input"
+                placeholder="Search for shirts, watches, dresses…"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button type="button" className="nav__icon" aria-label="Close search" onClick={()=>setSearchOpen(false)}><X size={20}/></button>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>
