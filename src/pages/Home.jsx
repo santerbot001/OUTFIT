@@ -92,13 +92,6 @@ export default function Home() {
         <div className="gram">{GALLERY.map((g,i)=>(<Reveal key={i} delay={i*.04}><div className="gram__item"><img src={g} alt="" loading="lazy" /></div></Reveal>))}</div>
       </section>
 
-      {/* NEWSLETTER */}
-      <section className="section"><div className="container news">
-        <Reveal><h2>Join the OUTFIT circle</h2><p>Early access to drops, private sales, and styling notes — straight to your inbox.</p>
-          <form className="news__form" onSubmit={e=>e.preventDefault()}><input className="input" type="email" placeholder="Your email address" required /><button className="btn">Subscribe</button></form>
-        </Reveal>
-      </div></section>
-
       <QuickView product={qv} onClose={()=>setQv(null)} />
     </motion.div>
   )
