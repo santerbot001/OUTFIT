@@ -39,7 +39,6 @@ export default function Home() {
             <Reveal key={c.slug} delay={i*.05}>
               <Link to={`/category/${c.slug}`} className="cat-card">
                 <img src={c.cover} alt={c.label} loading="lazy" />
-                <div className="cat-card__veil" />
                 <span className="cat-card__label">{c.label}</span>
               </Link>
             </Reveal>
