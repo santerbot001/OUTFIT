@@ -17,11 +17,55 @@ export default function Checkout() {
     'State':'',
     'PIN code':''
   })
+  const [errors,setErrors] = useState({})
 
-  const isAddressValid = Object.values(formData).every(val => val.trim() !== '')
+  const validateAddress = () => {
+    const newErrors = {}
+
+    if (!formData['Full name']?.trim()) {
+      newErrors['Full name'] = 'Full name is required'
+    } else if (formData['Full name'].trim().length < 3) {
+      newErrors['Full name'] = 'Full name must be at least 3 characters'
+    } else if (!/^[a-zA-Z\s]+$/.test(formData['Full name'])) {
+      newErrors['Full name'] = 'Full name should only contain letters'
+    }
+
+    if (!formData['Phone']?.trim()) {
+      newErrors['Phone'] = 'Phone number is required'
+    } else if (!/^\d{10}$/.test(formData['Phone'].replace(/\D/g, ''))) {
+      newErrors['Phone'] = 'Phone number must be 10 digits'
+    }
+
+    if (!formData['Address line']?.trim()) {
+      newErrors['Address line'] = 'Address line is required'
+    } else if (formData['Address line'].trim().length < 5) {
+      newErrors['Address line'] = 'Address must be at least 5 characters'
+    }
+
+    if (!formData['City']?.trim()) {
+      newErrors['City'] = 'City is required'
+    } else if (!/^[a-zA-Z\s\-]+$/.test(formData['City'])) {
+      newErrors['City'] = 'City should only contain letters'
+    }
+
+    if (!formData['State']?.trim()) {
+      newErrors['State'] = 'State is required'
+    } else if (!/^[a-zA-Z\s\-]+$/.test(formData['State'])) {
+      newErrors['State'] = 'State should only contain letters'
+    }
+
+    if (!formData['PIN code']?.trim()) {
+      newErrors['PIN code'] = 'PIN code is required'
+    } else if (!/^\d{6}$/.test(formData['PIN code'])) {
+      newErrors['PIN code'] = 'PIN code must be 6 digits'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const next = ()=> {
-    if(step===0 && !isAddressValid) return
+    if(step===0 && !validateAddress()) return
     step<STEPS.length-1 ? setStep(s=>s+1) : (setDone(true), clear())
   }
   if(done) return (
@@ -35,11 +79,11 @@ export default function Checkout() {
       <div className="checkout__main">
         <div className="steps">{STEPS.map((s,i)=>(<div key={s} className={'steps__item'+(i<=step?' is-on':'')}><span className="steps__dot">{i<step?<Check size={14}/>:i+1}</span><span>{s}</span></div>))}</div>
         <motion.div key={step} initial={{opacity:0,x:16}} animate={{opacity:1,x:0}} transition={{duration:.35}} className="checkout__panel">
-          {step===0 && <Form fields={[['Full name','text'],['Phone','tel'],['Address line','text'],['City','text'],['State','text'],['PIN code','text']]} title="Shipping address" data={formData} onChange={setFormData} />}
+          {step===0 && <Form fields={[['Full name','text'],['Phone','tel'],['Address line','text'],['City','text'],['State','text'],['PIN code','text']]} title="Shipping address" data={formData} onChange={setFormData} errors={errors} />}
           {step===1 && <div className="opts">{[['Card','Visa, Mastercard, Amex'],['UPI','GPay, PhonePe, Paytm'],['Cash on Delivery','Pay when it arrives']].map(([t,s],i)=>(<label key={t} className="opt"><input type="radio" name="pay" defaultChecked={i===0}/><div><strong>{t}</strong><span>{s}</span></div></label>))}</div>}
           {step===2 && <div><h3 style={{marginBottom:12}}>Review your order</h3>{items.map(it=>(<div key={it.key} className="checkout__line"><span>{it.name} × {it.qty}</span><strong>{inr(it.price*it.qty)}</strong></div>))}{items.length===0 && <p style={{color:'var(--muted)'}}>Your cart is empty.</p>}</div>}
         </motion.div>
-        <div className="checkout__nav">{step>0 && <button className="btn btn--ghost" onClick={()=>setStep(s=>s-1)}>Back</button>}<button className="btn" onClick={next} disabled={step===0 && !isAddressValid}>{step===STEPS.length-1?'Place Order':'Continue'}</button></div>
+        <div className="checkout__nav">{step>0 && <button className="btn btn--ghost" onClick={()=>setStep(s=>s-1)}>Back</button>}<button className="btn" onClick={next}>{step===STEPS.length-1?'Place Order':'Continue'}</button></div>
       </div>
       <aside className="checkout__summary">
         <h3>Order Summary</h3>
@@ -48,5 +92,5 @@ export default function Checkout() {
     </motion.div>
   )
 }
-function Form({fields,title,data,onChange}){return <div><h3 style={{marginBottom:14}}>{title}</h3><div className="grid grid--2">{fields.map(([l,t])=>(<div key={l} className="field"><label>{l}</label><input className="input" type={t} value={data?.[l]||''} onChange={(e)=>onChange({...data,[l]:e.target.value})}/></div>))}</div></div>}
+function Form({fields,title,data,onChange,errors}){return <div><h3 style={{marginBottom:14}}>{title}</h3><div className="grid grid--2">{fields.map(([l,t])=>(<div key={l} className="field"><label>{l}</label><input className={`input ${errors?.[l]?'input-error':''}`} type={t} value={data?.[l]||''} onChange={(e)=>onChange({...data,[l]:e.target.value})}/>{errors?.[l] && <span className="field-error">{errors[l]}</span>}</div>))}</div></div>}
 function Row({l,v,strong}){return <div className={'drawer__row'+(strong?' is-total':'')}><span>{l}</span><span>{v}</span></div>}
