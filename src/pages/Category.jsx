@@ -13,7 +13,7 @@ export default function Category() {
   const [selectedGender, setSelectedGender] = useState(null)
   const [selectedColor, setSelectedColor] = useState(null)
 
-  const genders = ['men', 'women', 'unisex']
+  const genders = ['men', 'women']
   const colors = [...new Set(allProducts.flatMap(p => p.colors))].sort()
 
   const filteredProducts = allProducts.filter(p => {
