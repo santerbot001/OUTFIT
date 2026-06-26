@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import './product-filter.css'
 
-export default function ProductFilter({ products, onFilter }) {
+export default function ProductFilter({ products, onFilter, showGenderFilter = false }) {
   const [expanded, setExpanded] = useState({ gender: true, price: false, size: false, color: false })
   const [filters, setFilters] = useState({ gender: [], price: [0, 20000], size: [], color: [] })
 
+  const genders = ['Men', 'Women']
   const priceRanges = [
     { label: 'Under ₹2,000', min: 0, max: 2000 },
     { label: '₹2,000 - ₹5,000', min: 2000, max: 5000 },
@@ -39,8 +40,32 @@ export default function ProductFilter({ products, onFilter }) {
     applyFilters(updated)
   }
 
+  const getProductGender = (product) => {
+    if (product.category === 'dresses') return 'Women'
+    if (product.name?.toLowerCase().includes("women's")) return 'Women'
+    if (product.name?.toLowerCase().includes("men's")) return 'Men'
+    return 'Unisex'
+  }
+
+  const handleGenderChange = (gender) => {
+    const newGenders = filters.gender.includes(gender)
+      ? filters.gender.filter(g => g !== gender)
+      : [...filters.gender, gender]
+    const updated = { ...filters, gender: newGenders }
+    setFilters(updated)
+    applyFilters(updated)
+  }
+
   const applyFilters = (activeFilters) => {
     const filtered = products.filter(p => {
+      // Gender filter
+      if (showGenderFilter && activeFilters.gender.length > 0) {
+        const productGender = getProductGender(p)
+        if (!activeFilters.gender.includes(productGender)) {
+          return false
+        }
+      }
+
       // Price filter
       if (p.price < activeFilters.price[0] || p.price > activeFilters.price[1]) {
         return false
@@ -68,7 +93,7 @@ export default function ProductFilter({ products, onFilter }) {
     setExpanded(prev => ({ ...prev, [section]: !prev[section] }))
   }
 
-  const activeCount = filters.size.length + filters.color.length + (filters.price[0] > 0 || filters.price[1] < 20000 ? 1 : 0)
+  const activeCount = filters.gender.length + filters.size.length + filters.color.length + (filters.price[0] > 0 || filters.price[1] < 20000 ? 1 : 0)
 
   return (
     <div className="product-filter">
@@ -86,6 +111,29 @@ export default function ProductFilter({ products, onFilter }) {
           </button>
         )}
       </div>
+
+      {showGenderFilter && (
+        <div className="filter-section">
+          <button className="filter-toggle" onClick={() => toggleExpand('gender')}>
+            <span>Gender</span>
+            <ChevronDown size={16} className={expanded.gender ? 'expanded' : ''} />
+          </button>
+          {expanded.gender && (
+            <div className="filter-options">
+              {genders.map(gender => (
+                <label key={gender} className="filter-checkbox">
+                  <input
+                    type="checkbox"
+                    checked={filters.gender.includes(gender)}
+                    onChange={() => handleGenderChange(gender)}
+                  />
+                  <span>{gender}</span>
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Price Filter */}
       <div className="filter-section">

@@ -18,6 +18,7 @@ export default function Category() {
   const [filtered, setFiltered] = useState(all)
   const [filterOpen, setFilterOpen] = useState(false)
   const showFilterButton = slug === 'shoes' || slug === 'watches'
+  const showGenderFilter = slug === 'shoes' || slug === 'watches'
   const items = useMemo(()=>{
     const a=[...filtered]
     if(sort==='low') a.sort((x,y)=>x.price-y.price)
@@ -45,13 +46,13 @@ export default function Category() {
           </div>
         </div>
         <div style={{display:'grid',gridTemplateColumns:'250px 1fr',gap:'30px'}}>
-          <ProductFilter products={all} onFilter={setFiltered} />
+          <ProductFilter products={all} onFilter={setFiltered} showGenderFilter={showGenderFilter} />
           <div className="grid grid--4">
             {items.map((p,i)=>(<Reveal key={p.id} delay={(i%4)*.05}><ProductCard product={p} onQuickView={setQv} /></Reveal>))}
           </div>
         </div>
       </section>
-      <FilterModal isOpen={filterOpen} onClose={()=>setFilterOpen(false)} products={all} onFilter={setFiltered} />
+      <FilterModal isOpen={filterOpen} onClose={()=>setFilterOpen(false)} products={all} onFilter={setFiltered} showGenderFilter={showGenderFilter} />
       <QuickView product={qv} onClose={()=>setQv(null)} />
     </motion.div>
   )
