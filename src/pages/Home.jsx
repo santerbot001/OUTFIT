@@ -62,7 +62,7 @@ export default function Home() {
 
       {/* PROMO */}
       <section className="section"><div className="container promo">
-        {[[Truck,'Free Shipping','On orders over ₹4,999'],[RefreshCw,'Easy Returns','30-day hassle-free'],[ShieldCheck,'Secure Payments','256-bit encryption'],[Zap,'Fast Delivery','2–4 business days']].map(([Icon,t,s],i)=>(
+        {[[Truck,'Free Shipping','On orders over ₹1499'],[RefreshCw,'Easy Returns','30-day hassle-free'],[ShieldCheck,'Secure Payments','256-bit encryption'],[Zap,'Fast Delivery','1 business day']].map(([Icon,t,s],i)=>(
           <Reveal key={i} delay={i*.05}><div className="promo__item"><Icon size={26}/><div><strong>{t}</strong><span>{s}</span></div></div></Reveal>
         ))}
       </div></section>
