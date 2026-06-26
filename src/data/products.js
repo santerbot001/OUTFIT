@@ -4,7 +4,8 @@ const img = (seed) => `https://picsum.photos/seed/${seed}/800/1000`
 export const CATEGORIES = [
   { slug: 'shirts', label: "Men's Shirts", cover: img('outfit-shirts-hero') },
   { slug: 'pants', label: "Men's Pants", cover: img('outfit-pants-hero') },
-  { slug: 'dresses', label: "Women's Dresses", cover: img('outfit-dresses-hero') },
+  { slug: 'dresses', label: "Sale", cover: img('outfit-dresses-hero') },
+  { slug: 'women-dresses', label: "Women's Dresses", cover: img('outfit-dresses-hero') },
   { slug: 'shoes', label: 'Shoes', cover: img('outfit-shoes-hero') },
   { slug: 'watches', label: 'Watches', cover: img('outfit-watches-hero') },
 ]
@@ -40,7 +41,10 @@ export const PRODUCTS = [
   mk(12, 'Casual Linen Dress', 'OUTFIT', 'dresses', 2699, 4200, 4.7, ['White', 'Beige', 'Olive'], Sapp, 'Casual'),
 ]
 
-export const byCategory = (slug) => PRODUCTS.filter(p => p.category === slug)
+export const byCategory = (slug) => {
+  const category = slug === 'women-dresses' ? 'dresses' : slug
+  return PRODUCTS.filter(p => p.category === category)
+}
 export const byCollection = (name) => PRODUCTS.filter(p => p.collection === name)
 export const getProduct = (id) => PRODUCTS.find(p => p.id === Number(id))
 export const related = (p) => PRODUCTS.filter(x => x.category === p.category && x.id !== p.id).slice(0, 4)
