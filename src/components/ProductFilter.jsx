@@ -4,15 +4,9 @@ import './product-filter.css'
 
 export default function ProductFilter({ products, onFilter, showGenderFilter = false }) {
   const [expanded, setExpanded] = useState({ gender: true, price: false, size: false, color: false })
-  const [filters, setFilters] = useState({ gender: [], price: [0, 20000], size: [], color: [] })
+  const [filters, setFilters] = useState({ gender: [], price: [0, 50000], size: [], color: [] })
 
   const genders = ['Men', 'Women']
-  const priceRanges = [
-    { label: 'Under ₹2,000', min: 0, max: 2000 },
-    { label: '₹2,000 - ₹5,000', min: 2000, max: 5000 },
-    { label: '₹5,000 - ₹10,000', min: 5000, max: 10000 },
-    { label: '₹10,000+', min: 10000, max: 50000 },
-  ]
   const allSizes = ['S', 'M', 'L', 'XL', '7', '8', '9', '10', '11']
   const allColors = ['Black', 'White', 'Beige', 'Navy', 'Olive', 'Brown', 'Silver', 'Gold']
 
@@ -103,8 +97,8 @@ export default function ProductFilter({ products, onFilter, showGenderFilter = f
           <button
             className="filter-reset"
             onClick={() => {
-              setFilters({ gender: [], price: [0, 20000], size: [], color: [] })
-              applyFilters({ gender: [], price: [0, 20000], size: [], color: [] })
+              setFilters({ gender: [], price: [0, 50000], size: [], color: [] })
+              applyFilters({ gender: [], price: [0, 50000], size: [], color: [] })
             }}
           >
             Clear ({activeCount})
@@ -142,18 +136,59 @@ export default function ProductFilter({ products, onFilter, showGenderFilter = f
           <ChevronDown size={16} className={expanded.price ? 'expanded' : ''} />
         </button>
         {expanded.price && (
-          <div className="filter-options">
-            {priceRanges.map((range, idx) => (
-              <label key={idx} className="filter-checkbox">
-                <input
-                  type="radio"
-                  name="price"
-                  checked={filters.price[0] === range.min && filters.price[1] === range.max}
-                  onChange={() => handlePriceRange(range.min, range.max)}
-                />
-                <span>{range.label}</span>
-              </label>
-            ))}
+          <div className="price-slider-container">
+            <div className="price-inputs">
+              <input
+                type="number"
+                min="0"
+                max="50000"
+                value={filters.price[0]}
+                onChange={(e) => {
+                  const val = Math.min(Number(e.target.value), filters.price[1])
+                  handlePriceRange(val, filters.price[1])
+                }}
+                className="price-input"
+              />
+              <span className="price-separator">-</span>
+              <input
+                type="number"
+                min="0"
+                max="50000"
+                value={filters.price[1]}
+                onChange={(e) => {
+                  const val = Math.max(Number(e.target.value), filters.price[0])
+                  handlePriceRange(filters.price[0], val)
+                }}
+                className="price-input"
+              />
+            </div>
+            <div className="range-slider">
+              <input
+                type="range"
+                min="0"
+                max="50000"
+                value={filters.price[0]}
+                onChange={(e) => {
+                  const val = Math.min(Number(e.target.value), filters.price[1])
+                  handlePriceRange(val, filters.price[1])
+                }}
+                className="range-input range-input-min"
+              />
+              <input
+                type="range"
+                min="0"
+                max="50000"
+                value={filters.price[1]}
+                onChange={(e) => {
+                  const val = Math.max(Number(e.target.value), filters.price[0])
+                  handlePriceRange(filters.price[0], val)
+                }}
+                className="range-input range-input-max"
+              />
+              <div className="range-track">
+                <div className="range-fill" style={{left: `${(filters.price[0]/50000)*100}%`, right: `${100-(filters.price[1]/50000)*100}%`}} />
+              </div>
+            </div>
           </div>
         )}
       </div>
