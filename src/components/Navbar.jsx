@@ -74,7 +74,7 @@ export default function Navbar() {
               <input
                 autoFocus
                 className="nav__search-input"
-                placeholder="Search for shirts, watches, dresses…"
+                placeholder="Search for shirts, Accesories, dresses…"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />

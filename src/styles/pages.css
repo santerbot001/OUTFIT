@@ -86,7 +86,7 @@
 .pdp__desc{color:var(--ink-soft);margin-bottom:20px}
 .pdp__opt{margin-bottom:18px}
 .pdp__opt-label{font-size:13px;color:var(--muted)}
-.pdp__swatches,.pdp__sizes{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.pdp__sAccesories,.pdp__sizes{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
 .pdp__sw,.pdp__size{border:1px solid var(--line-2);background:var(--surface);padding:9px 14px;border-radius:var(--r-sm);font-size:13px;font-weight:500}
 .pdp__sw.is-on,.pdp__size.is-on{border-color:var(--ink);background:var(--ink);color:#fff}
 .pdp__buyrow{display:flex;align-items:center;gap:16px;margin:18px 0}

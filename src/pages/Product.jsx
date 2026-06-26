@@ -56,7 +56,7 @@ export default function Product() {
           <div className="pdp__rate"><Rating value={p.rating} count={p.reviews} /></div>
           <div className="pdp__price"><Price price={p.price} original={p.original} />{p.discount>0 && <span className="pdp__save">Save {p.discount}%</span>}</div>
           <p className="pdp__desc">{p.description}</p>
-          {p.colors.length>0 && <div className="pdp__opt"><span className="pdp__opt-label">Color: <strong>{color}</strong></span><div className="pdp__swatches">{p.colors.map(c=>(<button key={c} className={'pdp__sw'+(c===color?' is-on':'')} onClick={()=>setColor(c)}>{c}</button>))}</div></div>}
+          {p.colors.length>0 && <div className="pdp__opt"><span className="pdp__opt-label">Color: <strong>{color}</strong></span><div className="pdp__sAccesories">{p.colors.map(c=>(<button key={c} className={'pdp__sw'+(c===color?' is-on':'')} onClick={()=>setColor(c)}>{c}</button>))}</div></div>}
           {p.sizes.length>0 && <div className="pdp__opt"><span className="pdp__opt-label">Size: <strong>{size}</strong></span><div className="pdp__sizes">{p.sizes.map(s=>(<button key={s} className={'pdp__size'+(s===size?' is-on':'')} onClick={()=>setSize(s)}>{s}</button>))}</div></div>}
           <div className="pdp__buyrow">
             <div className="drawer__qty"><button aria-label="Decrease" onClick={()=>setQty(q=>Math.max(1,q-1))}><Minus size={14}/></button><span>{qty}</span><button aria-label="Increase" onClick={()=>setQty(q=>q+1)}><Plus size={14}/></button></div>

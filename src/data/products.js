@@ -2,12 +2,10 @@
 const img = (seed) => `https://picsum.photos/seed/${seed}/800/1000`
 
 export const CATEGORIES = [
-  { slug: 'shirts', label: "Men's Shirts", cover: 'https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F7967847b2acf4d5a9769d31187fb2e6e?format=webp&width=800&height=1200' },
-  { slug: 'pants', label: "Men's Pants", cover: img('outfit-pants-hero') },
+  { slug: 'shirts', label: "Men", cover: 'https://images.unsplash.com/photo-1626557981101-aae6f84aa6ff?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
   { slug: 'dresses', label: "Sale", cover: img('outfit-dresses-hero') },
-  { slug: 'women-dresses', label: "Women's Dresses", cover: 'https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F429f00ab51014a38b58506a362beb64f?format=webp&width=800&height=1200' },
-  { slug: 'shoes', label: 'Shoes', cover: 'https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F8a9c2dc5ae2e41fc9b616c24152d0686?format=webp&width=800&height=1200' },
-  { slug: 'watches', label: 'Watches', cover: 'https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F0c7f2b6240f54d449d7a6367fcf77477?format=webp&width=800&height=1200' },
+  { slug: 'women', label: "Women", cover: 'https://images.unsplash.com/photo-1756483510802-0acac24ab4e8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+  { slug: 'Accesories', label: 'Accesories', cover: 'https://images.unsplash.com/photo-1620625515032-6ed0c1790c75?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8d2F0Y2h8ZW58MHx8MHx8fDA%3D' },
 ]
 
 const mk = (id, name, brand, category, price, original, rating, colors, sizes, collection, gender = 'unisex') => ({
@@ -42,9 +40,9 @@ export const PRODUCTS = [
   {...mk(1, 'Classic Leather Oxford', 'OUTFIT', 'shoes', 4500, 6000, 4.8, ['Black', 'Brown'], Sshoe, 'Formal', 'men'), image: shoeImg1, gallery: [shoeImg1, shoeImg1, shoeImg1, shoeImg1]},
   {...mk(2, 'Premium Running Sneaker', 'OUTFIT', 'shoes', 3800, 5500, 4.7, ['White', 'Navy', 'Black'], Sshoe, 'Sports', 'men'), image: shoeImg2, gallery: [shoeImg2, shoeImg2, shoeImg2, shoeImg2]},
   {...mk(3, 'Casual Canvas Low-Top', 'OUTFIT', 'shoes', 2200, 3500, 4.6, ['Beige', 'White', 'Olive'], Sshoe, 'Casual', 'women'), image: shoeImg3, gallery: [shoeImg3, shoeImg3, shoeImg3, shoeImg3]},
-  {...mk(4, 'Elegant Analog Watch', 'OUTFIT', 'watches', 8999, 12000, 4.9, ['Black', 'Silver'], ['One Size'], 'Luxury', 'men'), image: watchImg1, gallery: [watchImg1, watchImg1, watchImg1, watchImg1]},
-  {...mk(5, 'Minimalist Steel Watch', 'OUTFIT', 'watches', 5499, 8000, 4.8, ['Silver'], ['One Size'], 'Modern', 'women'), image: watchImg2, gallery: [watchImg2, watchImg2, watchImg2, watchImg2]},
-  {...mk(6, 'Classic Leather Watch', 'OUTFIT', 'watches', 3999, 6500, 4.7, ['Brown', 'Black'], ['One Size'], 'Classic', 'unisex'), image: watchImg3, gallery: [watchImg3, watchImg3, watchImg3, watchImg3]},
+  {...mk(4, 'Elegant Analog Watch', 'OUTFIT', 'Accesories', 8999, 12000, 4.9, ['Black', 'Silver'], ['One Size'], 'Luxury', 'men'), image: watchImg1, gallery: [watchImg1, watchImg1, watchImg1, watchImg1]},
+  {...mk(5, 'Minimalist Steel Watch', 'OUTFIT', 'Accesories', 5499, 8000, 4.8, ['Silver'], ['One Size'], 'Modern', 'women'), image: watchImg2, gallery: [watchImg2, watchImg2, watchImg2, watchImg2]},
+  {...mk(6, 'Classic Leather Watch', 'OUTFIT', 'Accesories', 3999, 6500, 4.7, ['Brown', 'Black'], ['One Size'], 'Classic', 'unisex'), image: watchImg3, gallery: [watchImg3, watchImg3, watchImg3, watchImg3]},
   {...mk(9, 'Slim Fit Chinos', 'OUTFIT', 'pants', 2299, 3500, 4.6, ['Black', 'Beige', 'Navy'], Sapp, 'Casual', 'men'), image: pantsImg1, gallery: [pantsImg1, pantsImg1, pantsImg1, pantsImg1]},
   {...mk(10, 'Classic Denim Jeans', 'OUTFIT', 'pants', 2899, 4500, 4.7, ['Black', 'Blue'], Sapp, 'Casual', 'men'), image: pantsImg2, gallery: [pantsImg2, pantsImg2, pantsImg2, pantsImg2]},
 ]
