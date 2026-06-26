@@ -46,6 +46,7 @@ export default function About() {
       {/* ABOUT HERO */}
       <section className="about-hero">
         <div className="container about-hero__content">
+          <img src="https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F53ef473cb5da4f16862c66536995f217?format=webp&width=800&height=1200" alt="OUTFIT Logo" className="about-hero__logo" />
           <h1>About OUTFIT</h1>
           <p>Premium fashion marketplace curated for modern minimalists who value quality and style.</p>
         </div>

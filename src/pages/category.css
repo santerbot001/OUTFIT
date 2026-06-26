@@ -1,0 +1,91 @@
+.cat-toolbar {
+  display: flex;
+  margin-bottom: 32px;
+}
+
+.cat-filters {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter-label {
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.filter-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-option {
+  padding: 8px 16px;
+  border: 1px solid var(--line-2);
+  background: #fff;
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.filter-option:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.filter-option.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.pcard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.no-products {
+  text-align: center;
+  color: var(--ink-soft);
+  padding: 40px 0;
+}
+
+@media(max-width: 1080px) {
+  .pcard-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media(max-width: 760px) {
+  .cat-filters {
+    gap: 20px;
+  }
+  
+  .pcard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 480px) {
+  .cat-filters {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .pcard-grid {
+    grid-template-columns: 1fr;
+  }
+}

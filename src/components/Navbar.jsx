@@ -43,7 +43,9 @@ export default function Navbar() {
     <header className={'nav' + (scrolled ? ' nav--scrolled' : '')}>
       <div className="container nav__inner">
         <button className="nav__burger" aria-label="Menu" onClick={()=>setMenuOpen(true)}><Menu size={22}/></button>
-        <Link to="/" className="nav__logo">OUTFIT</Link>
+        <Link to="/" className="nav__logo">
+          <img src="https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F5e077aae5319489aa778b77bbe61c513?format=webp&width=800&height=1200" alt="OUTFIT Logo" className="nav__logo-image" />
+        </Link>
 
         <nav className="nav__links" aria-label="Primary">
           <NavLink to="/" className={({isActive})=>'nav__link'+(isActive?' is-active':'')}>Home</NavLink>
@@ -86,7 +88,7 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div className="nav__mobile" initial={{x:'-100%'}} animate={{x:0}} exit={{x:'-100%'}} transition={{type:'tween',duration:.35,ease:[0.22,0.61,0.36,1]}}>
-            <div className="nav__mobile-head"><span className="nav__logo">OUTFIT</span><button className="nav__icon" aria-label="Close" onClick={()=>setMenuOpen(false)}><X size={22}/></button></div>
+            <div className="nav__mobile-head"><span className="nav__logo"><img src="https://cdn.builder.io/api/v1/image/assets%2Fd804a884d1294eac9363b52e819be07b%2F5e077aae5319489aa778b77bbe61c513?format=webp&width=800&height=1200" alt="OUTFIT Logo" className="nav__logo-image" /></span><button className="nav__icon" aria-label="Close" onClick={()=>setMenuOpen(false)}><X size={22}/></button></div>
             {LINKS.map((l,i)=>(<NavLink key={i} to={l.to} className="nav__mobile-link" onClick={()=>setMenuOpen(false)}>{l.label}</NavLink>))}
           </motion.div>
         )}
