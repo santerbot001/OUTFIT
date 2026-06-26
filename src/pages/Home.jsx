@@ -1,0 +1,105 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { Truck, RefreshCw, ShieldCheck, Zap } from 'lucide-react'
+import ProductCard from '../components/ProductCard.jsx'
+import QuickView from '../components/QuickView.jsx'
+import Reveal from '../components/Reveal.jsx'
+import Rating from '../components/Rating.jsx'
+import { CATEGORIES, byCollection, PRODUCTS, REVIEWS, GALLERY } from '../data/products.js'
+
+const PageMotion = { initial:{opacity:0}, animate:{opacity:1}, exit:{opacity:0}, transition:{duration:.4} }
+const stagger = { hidden:{}, show:{ transition:{ staggerChildren:.06 } } }
+const word = { hidden:{opacity:0,y:24}, show:{opacity:1,y:0,transition:{duration:.6,ease:[0.22,0.61,0.36,1]}} }
+
+export default function Home() {
+  const [qv,setQv] = useState(null)
+  const collections = ['New Arrivals','Best Sellers','Trending Now','Premium Collection','Limited Edition']
+  const headline = ['Style','Beyond','Trends']
+  return (
+    <motion.div {...PageMotion}>
+      {/* HERO */}
+      <section className="hero">
+        <motion.img className="hero__bg" src="https://picsum.photos/seed/outfit-hero/1800/1100" alt="" loading="eager"
+          initial={{opacity:0,scale:1.06,y:-10}} animate={{opacity:1,scale:1,y:0}} transition={{duration:1.2,ease:[0.22,0.61,0.36,1]}} />
+        <div className="hero__overlay" />
+        <div className="container hero__content">
+          <motion.span className="eyebrow" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.1}}>Premium Fashion Marketplace</motion.span>
+          <motion.h1 className="hero__title" variants={stagger} initial="hidden" animate="show">
+            {headline.map((w,i)=>(<motion.span key={i} variants={word} style={{display:'inline-block',marginRight:'.28em'}}>{w}</motion.span>))}
+          </motion.h1>
+          <motion.p className="hero__sub" initial={{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{delay:.7,duration:.6}}>
+            Curated essentials for Men &amp; Women — timeless silhouettes, exceptional materials, effortless minimalism.
+          </motion.p>
+          <motion.div initial={{opacity:0,scale:.9}} animate={{opacity:1,scale:1}} transition={{delay:1,duration:.5,ease:[0.22,0.61,0.36,1]}}>
+            <Link to="/category/shirts" className="btn hero__cta">Shop Now</Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CATEGORIES */}
+      <section className="section container">
+        <Reveal><div className="section__head"><span className="eyebrow">Browse</span><h2>Shop by Category</h2></div></Reveal>
+        <div className="cat-grid">
+          {CATEGORIES.map((c,i)=>(
+            <Reveal key={c.slug} delay={i*.05}>
+              <Link to={`/category/${c.slug}`} className="cat-card">
+                <img src={c.cover} alt={c.label} loading="lazy" />
+                <div className="cat-card__veil" />
+                <span className="cat-card__label">{c.label}</span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* FEATURED COLLECTIONS */}
+      {collections.map((col,ci)=>(
+        <section key={col} className="section container">
+          <Reveal><div className="section__head section__head--row"><div><span className="eyebrow">Featured</span><h2>{col}</h2></div><Link to="/category/shirts" className="section__link">View all →</Link></div></Reveal>
+          <div className="grid grid--4">
+            {byCollection(col).concat(PRODUCTS).slice(0,4).map((p,i)=>(
+              <Reveal key={p.id+'-'+ci} delay={i*.05}><ProductCard product={p} onQuickView={setQv} /></Reveal>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      {/* PROMO */}
+      <section className="section"><div className="container promo">
+        {[[Truck,'Free Shipping','On orders over ₹4,999'],[RefreshCw,'Easy Returns','30-day hassle-free'],[ShieldCheck,'Secure Payments','256-bit encryption'],[Zap,'Fast Delivery','2–4 business days']].map(([Icon,t,s],i)=>(
+          <Reveal key={i} delay={i*.05}><div className="promo__item"><Icon size={26}/><div><strong>{t}</strong><span>{s}</span></div></div></Reveal>
+        ))}
+      </div></section>
+
+      {/* REVIEWS */}
+      <section className="section container">
+        <Reveal><div className="section__head"><span className="eyebrow">Loved by thousands</span><h2>Customer Reviews</h2></div></Reveal>
+        <div className="grid grid--4">
+          {REVIEWS.map((r,i)=>(
+            <Reveal key={i} delay={i*.05}><div className="review">
+              <Rating value={r.rating} />
+              <p>"{r.text}"</p>
+              <div className="review__by"><img src={r.photo} alt={r.name} loading="lazy" /><span>{r.name}</span></div>
+            </div></Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* GALLERY */}
+      <section className="section container">
+        <Reveal><div className="section__head"><span className="eyebrow">@outfit</span><h2>Style Gallery</h2></div></Reveal>
+        <div className="gram">{GALLERY.map((g,i)=>(<Reveal key={i} delay={i*.04}><div className="gram__item"><img src={g} alt="" loading="lazy" /></div></Reveal>))}</div>
+      </section>
+
+      {/* NEWSLETTER */}
+      <section className="section"><div className="container news">
+        <Reveal><h2>Join the OUTFIT circle</h2><p>Early access to drops, private sales, and styling notes — straight to your inbox.</p>
+          <form className="news__form" onSubmit={e=>e.preventDefault()}><input className="input" type="email" placeholder="Your email address" required /><button className="btn">Subscribe</button></form>
+        </Reveal>
+      </div></section>
+
+      <QuickView product={qv} onClose={()=>setQv(null)} />
+    </motion.div>
+  )
+}
