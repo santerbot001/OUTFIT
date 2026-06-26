@@ -11,7 +11,6 @@ const LINKS = [
   { to:'/', label:'Home' },
   { to:'/category/shoes', label:'Shoes' },
   { to:'/category/watches', label:'Watches' },
-  { to:'/category/shirts', label:'New Arrivals' },
   { to:'/category/dresses', label:'Sale' },
 ]
 
