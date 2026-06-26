@@ -11,6 +11,12 @@ export default function About() {
   const [loading, setLoading] = useState(false)
   const { show } = useToast()
 
+  const handleEmailClick = (e) => {
+    const email = 'parthiravi20@gmail.com'
+    navigator.clipboard.writeText(email)
+    show({ type: 'success', text: 'Email copied to clipboard!' })
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
@@ -72,7 +78,7 @@ export default function About() {
           <motion.div className="contact-card" whileHover={{y:-4}} transition={{duration:.3}}>
             <div className="contact-card__icon"><Mail size={28}/></div>
             <h3>Email Us</h3>
-            <a href="mailto:parthiravi20@gmail.com" className="contact-card__link">parthiravi20@gmail.com</a>
+            <button className="contact-card__link" onClick={handleEmailClick} style={{background:'none', border:'none', padding:0, cursor:'pointer'}}>parthiravi20@gmail.com</button>
             <p>We respond within 24 hours</p>
           </motion.div>
         </div>
