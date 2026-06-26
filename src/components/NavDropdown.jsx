@@ -10,8 +10,6 @@ export default function NavDropdown() {
     men: [
       { label: 'Shirts', path: '/category/shirts' },
       { label: 'Pants', path: '/category/pants' },
-      { label: 'Shoes', path: '/category/shoes' },
-      { label: 'Watches', path: '/category/watches' },
     ],
     women: [
       { label: 'Dresses', path: '/category/dresses' },
