@@ -13,6 +13,14 @@ const MEN_SUBCATEGORIES = [
   { label: 'Traditional wears', slug: 'mens-traditional', image: 'https://images.unsplash.com/photo-1591209240644-b57fa99d6daa?w=600&h=800&fit=crop' },
 ]
 
+const WOMEN_SUBCATEGORIES = [
+  { label: 'Tops, jeans', slug: 'womens-tops', image: 'https://images.unsplash.com/photo-1551551234-5fd63aaf93fe?w=600&h=800&fit=crop' },
+  { label: 'Kurta and kurta sets', slug: 'womens-kurta', image: 'https://images.unsplash.com/photo-1610271340738-b049cd451cb5?w=600&h=800&fit=crop' },
+  { label: 'Dresses and jumpsuits', slug: 'womens-dresses', image: 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&h=800&fit=crop' },
+  { label: 'Party wears', slug: 'womens-party', image: 'https://images.unsplash.com/photo-1595777712802-4b03f4b85b8a?w=600&h=800&fit=crop' },
+  { label: 'Active wear', slug: 'womens-active', image: 'https://images.unsplash.com/photo-1535394965917-3c7b1c7d9c7d?w=600&h=800&fit=crop' },
+]
+
 export default function Category() {
   const { slug } = useParams()
   const meta = CATEGORIES.find(c=>c.slug===slug)
@@ -32,6 +40,7 @@ export default function Category() {
 
   const showFilters = slug === 'shoes' || slug === 'watches'
   const showMenSubcategories = slug === 'shirts'
+  const showWomenSubcategories = slug === 'women-dresses'
 
   return (
     <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:.4}}>
@@ -41,6 +50,18 @@ export default function Category() {
         {showMenSubcategories && (
           <div className="cat-grid">
             {MEN_SUBCATEGORIES.map((cat) => (
+              <Link key={cat.slug} to={`/category/${cat.slug}`} className="cat-card">
+                <img src={cat.image} alt={cat.label} />
+                <div className="cat-card__veil"></div>
+                <div className="cat-card__label">{cat.label}</div>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {showWomenSubcategories && (
+          <div className="cat-grid">
+            {WOMEN_SUBCATEGORIES.map((cat) => (
               <Link key={cat.slug} to={`/category/${cat.slug}`} className="cat-card">
                 <img src={cat.image} alt={cat.label} />
                 <div className="cat-card__veil"></div>
