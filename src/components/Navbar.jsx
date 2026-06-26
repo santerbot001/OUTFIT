@@ -12,6 +12,7 @@ const LINKS = [
   { to:'/category/shoes', label:'Shoes' },
   { to:'/category/watches', label:'Watches' },
   { to:'/category/dresses', label:'Sale' },
+  { to:'/about', label:'About' },
 ]
 
 export default function Navbar() {

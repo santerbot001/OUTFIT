@@ -12,6 +12,7 @@ import useLenis from './hooks/useLenis.js'
 
 const Home = lazy(() => import('./pages/Home.jsx'))
 const Search = lazy(() => import('./pages/Search.jsx'))
+const About = lazy(() => import('./pages/About.jsx'))
 const Category = lazy(() => import('./pages/Category.jsx'))
 const Product = lazy(() => import('./pages/Product.jsx'))
 const Checkout = lazy(() => import('./pages/Checkout.jsx'))
@@ -35,6 +36,7 @@ export default function App() {
                 <Routes location={location} key={location.pathname}>
                   <Route path="/" element={<Home />} />
                   <Route path="/search" element={<Search />} />
+                  <Route path="/about" element={<About />} />
                   <Route path="/category/:slug" element={<Category />} />
                   <Route path="/product/:id" element={<Product />} />
                   <Route path="/checkout" element={<Checkout />} />
