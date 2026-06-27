@@ -148,18 +148,25 @@
 /* MOBILE MENU */
 
 .nav__mobile{
-  position:fixed;
-  top:0;
-  left:0;
-  bottom:0;
-  width:82%;
-  max-width:340px;
-  background:#D6B489;
-  z-index:99999;
-  padding:20px 24px;
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 0 40px rgba(0,0,0,.25);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 85vw;
+  max-width: 340px;
+  height: 100vh;
+  background: #D6B489;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  overflow-y: auto;
+  box-shadow: 0 0 40px rgba(0,0,0,.25);
+}
+.nav__backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  z-index: 999998;
 }
 
 .nav__mobile::before{
